@@ -3,8 +3,20 @@
   <p>Find me in app/views/home/index.html.erb</p>
 </div>
 
+<%= render 'form'%>
+
 <div class="py-2">
-<%= turbo_frame_tag :index do %>
-  <p class=""><%= @data %></p>
+<%= turbo_frame_tag id="search-results" do %>
+<% if params[:search] %>
+  <ul>
+    <li><%= @data['name'] %>, <%= @data['state'] %>,<%= @data['country']%></li>
+    <li><%= @data['weather'][0]['main'] %></li>
+    <li><%= @data['weather'][0]['description'] %></li>
+    <li><%= @data['weather'][0]['icon'] %></li>
+    <li><%= @data['main']['temp']%></li>
+    <li><%= @data['main']['feels_like']%></li>
+    <li><%= @data['main']['temp_min'] %></li>
+  </ul>
+  <% end %>
 <% end %>
 </div>
