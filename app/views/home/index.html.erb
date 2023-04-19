@@ -1,0 +1,10 @@
+<div class="py-2">
+  <h1 class="font-bold text-4xl">Home#index</h1>
+  <p>Find me in app/views/home/index.html.erb</p>
+</div>
+
+<div class="py-2">
+<%= turbo_frame_tag :index do %>
+  <p class=""><%= @data %></p>
+<% end %>
+</div>
