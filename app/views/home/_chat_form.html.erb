@@ -1,0 +1,7 @@
+<div class="py-3">
+<%= form_with url: home_index_path, method: :get, class: "rounded-md outline-none px-3 py-2 mt-2" do |form| %>
+  <%= form.text_field :chat, placeholder: "Ask Chatgpt a question about the weather" %>
+  <%= form.submit "Ask ChatGPT a Question", class: "text-black-900 hover:text-amber-700" %> | 
+  <%= link_to "Clear Chat", home_index_path, class: "text-black-900 hover:text-amber-700"%>
+<% end %>
+</div>

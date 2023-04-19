@@ -13,7 +13,11 @@ class HomeController < ApplicationController
     else
       @data
     end
-    #@data = response.body
-    #render json: @data
+    if params[:chat]
+      chat = params[:chat]
+      hash = OpenaiService.new
+      #response = Faraday.get("https://api.openai.com/v1/models")
+       @chat_data = hash.get_chat_response("user", chat)
+    end
   end
 end

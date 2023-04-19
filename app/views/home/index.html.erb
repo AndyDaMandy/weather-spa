@@ -20,3 +20,9 @@
   <% end %>
 <% end %>
 </div>
+<%= render 'chat_form' %>
+<%= turbo_frame_tag id="ai-chat" do %>
+<% if params[:chat] %>
+  <%= @chat_data %>
+<% end %>
+<% end %>
