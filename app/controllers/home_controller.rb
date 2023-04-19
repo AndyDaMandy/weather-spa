@@ -18,6 +18,8 @@ class HomeController < ApplicationController
       hash = OpenaiService.new
       #response = Faraday.get("https://api.openai.com/v1/models")
        @chat_data = hash.get_chat_response("user", chat)
+    else
+      @chat_data
     end
   end
 end
