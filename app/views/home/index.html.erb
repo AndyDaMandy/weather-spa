@@ -6,22 +6,22 @@
 
 <div class="py-2">
 <%= turbo_frame_tag id="search-results" do %>
-<% if params[:search] %>
-  <ul>
-    <li><%= @data['name'] %>, <%= @data['state'] %>,<%= @data['country']%></li>
-    <li><%= @data['weather'][0]['main'] %></li>
-    <li><%= @data['weather'][0]['description'] %></li>
-    <li><%= @data['weather'][0]['icon'] %></li>
-    <li><%= @data['main']['temp']%></li>
-    <li><%= @data['main']['feels_like']%></li>
-    <li><%= @data['main']['temp_min'] %></li>
-  </ul>
+  <% if params[:search] %>
+    <ul>
+      <li><%= @data['name'] %>, <%= @data['state'] %>,<%= @data['country']%></li>
+      <li><%= @data['weather'][0]['main'] %></li>
+      <li><%= @data['weather'][0]['description'] %></li>
+      <li><%= @data['weather'][0]['icon'] %></li>
+      <li><%= @data['main']['temp']%></li>
+      <li><%= @data['main']['feels_like']%></li>
+      <li><%= @data['main']['temp_min'] %></li>
+    </ul>
   <% end %>
 <% end %>
 </div>
 <%= render 'chat_form' %>
 <%= turbo_frame_tag id="ai-chat" do %>
-<% if params[:chat] %>
-  <%= @chat_data %>
-<% end %>
+  <% if params[:chat] %>
+    <%= @chat_data %>
+  <% end %>
 <% end %>
