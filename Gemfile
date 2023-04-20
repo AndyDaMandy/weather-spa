@@ -14,6 +14,8 @@ gem "puma", "~> 5.0"
 
 #trying mongodb here
 gem 'mongoid'
+
+gem "mongo", "~> 2"
 #trying gem faraday for apis
 gem 'faraday'
 #figaro
