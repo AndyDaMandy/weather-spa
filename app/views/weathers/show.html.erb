@@ -20,7 +20,7 @@
     <%= render @weather.chats %>
     <div class="chats-form">
       <hr />
-      <h3 class="subtitle is-3">Leave a reply</h3>
+      <h3 class="subtitle is-3">Ask a question about this weather via ChatGPT</h3>
       <%= render partial: 'chats/form', locals: { chat: @weather.chats.build } %>
     </div>
   </div>
