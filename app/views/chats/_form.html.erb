@@ -12,19 +12,12 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :question %>
-    <%= form.text_field :question, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <%= radio_button_tag(:question, "Tell me how to dress in this weather") %>
+  <%= label_tag(:question, "Question: Tell me how to dress in this weather") %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :response %>
-    <%= form.text_area :response, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+    <%= form.hidden_field :weather_id %>
 
-  <div class="my-5">
-    <%= form.label :weather_id %>
-    <%= form.text_field :weather_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

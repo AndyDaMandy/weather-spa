@@ -13,6 +13,7 @@ class ChatsController < ApplicationController
   # GET /chats/new
   def new
     @chat = Chat.new
+    @weather = weather.find(params[:id])
   end
 
   # GET /chats/1/edit
@@ -21,12 +22,14 @@ class ChatsController < ApplicationController
 
   # POST /chats or /chats.json
   def create
-    chat = params[:chat]
+    @weather = Weather.find(chat_params[:weather_id])
+    chat = chat_params[:question].to_s + @weather.data.to_s
     hash = OpenaiService.new
     #response = Faraday.get("https://api.openai.com/v1/models")
     @chat_data = hash.get_chat_response("user", chat)
     @chat = Chat.new(chat_params)
     @chat.response = @chat_data
+    @chat.question = chat
 
     respond_to do |format|
       if @chat.save
@@ -66,6 +69,10 @@ class ChatsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_chat
       @chat = Chat.find(params[:id])
+    end
+
+    def set_weather
+
     end
 
     # Only allow a list of trusted parameters through.

@@ -9,6 +9,7 @@ class WeathersController < ApplicationController
 
   # GET /weathers/1 or /weathers/1.json
   def show
+    @data = JSON.parse(@weather.data)
   end
 
   # GET /weathers/new
@@ -24,7 +25,8 @@ class WeathersController < ApplicationController
   def create
     search = weather_params[:location].strip.split(',').join(',')
     response = Faraday.get("https://api.openweathermap.org/data/2.5/weather?q=#{search}k&APPID=#{ENV['openweather_api_key']}")
-    @data = JSON.parse(response.body)
+    #@data = JSON.parse(response.body)
+    @data = response.body
     @weather = Weather.new(weather_params)
     @weather.location = search
     @weather.data = @data

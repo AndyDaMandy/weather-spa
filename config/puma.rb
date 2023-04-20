@@ -31,17 +31,6 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # processes).
 #
 # workers ENV.fetch("WEB_CONCURRENCY") { 2 }
-#to fix mongo
-on_worker_boot do
-    Mongoid::Clients.clients.each do |name, client|
-      client.close
-      client.reconnect
-    end
-  end
-  
-  before_fork do
-    Mongoid.disconnect_clients
-  end
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code

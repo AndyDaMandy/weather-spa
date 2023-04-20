@@ -12,4 +12,17 @@
     </div>
     <%= link_to 'Back to weathers', weathers_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
+  <section class="ask ChatGPT">
+  <div class="container">
+    <h2 class="subtitle is-5">
+      <strong><%= @weather.chats.count %></strong> Chats - powered by ChatGPT
+    </h2>
+    <%= render @weather.chats %>
+    <div class="chats-form">
+      <hr />
+      <h3 class="subtitle is-3">Leave a reply</h3>
+      <%= render partial: 'chats/form', locals: { chat: @weather.chats.build } %>
+    </div>
+  </div>
+</section>
 </div>
