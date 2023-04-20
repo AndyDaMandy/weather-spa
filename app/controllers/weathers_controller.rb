@@ -1,5 +1,6 @@
 class WeathersController < ApplicationController
   before_action :set_weather, only: %i[ show edit update destroy ]
+  require 'json'
 
   # GET /weathers or /weathers.json
   def index
@@ -21,10 +22,11 @@ class WeathersController < ApplicationController
 
   # POST /weathers or /weathers.json
   def create
-    search = params[:search].strip.split(',').join(',')
+    search = weather_params[:location].strip.split(',').join(',')
     response = Faraday.get("https://api.openweathermap.org/data/2.5/weather?q=#{search}k&APPID=#{ENV['openweather_api_key']}")
     @data = JSON.parse(response.body)
     @weather = Weather.new(weather_params)
+    @weather.location = search
     @weather.data = @data
 
     respond_to do |format|
