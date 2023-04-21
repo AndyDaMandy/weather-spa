@@ -22,15 +22,16 @@ class ChatsController < ApplicationController
 
   # POST /chats or /chats.json
   def create
-    @weather = Weather.find(chat_params[:weather_id])
-    chat = chat_params[:question].to_s + @weather.data.to_s
-    hash = OpenaiService.new
-    #response = Faraday.get("https://api.openai.com/v1/models")
-    @chat_data = hash.get_chat_response("user", chat)
-    @chat = Chat.new(chat_params)
-    @chat.response = @chat_data
-    @chat.question = chat
-
+      @weather = Weather.find(chat_params[:weather_id])
+      chat = "#{chat_params[:question]} #{JSON.parse(@weather.data)}"
+      #chat = chat_params[:question]
+      hash = OpenaiService.new
+      #response = Faraday.get("https://api.openai.com/v1/models")
+      @chat_data = hash.get_chat_response("user", chat)
+      @chat = Chat.new(chat_params)
+      @chat.response = @chat_data
+      @chat.question = chat_params[:question]
+    
     respond_to do |format|
       if @chat.save
         format.html { redirect_to weather_url(@weather), notice: "Chat was successfully created." }

@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="my-5">
-  <%= radio_button_tag(:question, "Tell me how to dress in this weather: ") %>
-  <%= label_tag(:question, "Question: Tell me how to dress in this weather") %>
+    <%= form.radio_button :question, "Tell me how to dress based on the weather data provided: " %>
+    <%= form.label :question, "Question: Tell me how to dress in this weather" %>
+  </div>
+  <div class="my-5">
+    <%= form.radio_button :question, "Convert this weather data into a haiku: " %>
+    <%= form.label :question, "How would this weather sound in an haiku?" %>
   </div>
 
     <%= form.hidden_field :weather_id %>

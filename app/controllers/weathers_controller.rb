@@ -24,12 +24,21 @@ class WeathersController < ApplicationController
   # POST /weathers or /weathers.json
   def create
     search = weather_params[:location].strip.split(',').join(',')
-    response = Faraday.get("https://api.openweathermap.org/data/2.5/weather?q=#{search}k&APPID=#{ENV['openweather_api_key']}")
-    #@data = JSON.parse(response.body)
-    @data = response.body
-    @weather = Weather.new(weather_params)
-    @weather.location = search
-    @weather.data = @data
+      response = Faraday.get("https://api.openweathermap.org/data/2.5/weather?q=#{search}k&APPID=#{ENV['openweather_api_key']}&units=imperial")
+      #@data = JSON.parse(response.body)
+      if response.status == 404
+        respond_to do |format|     
+            redirect_to new_weather_path, notice: "Could not find the location, try using city and country or city and state"
+            #flash[:alert] => "Could not find the location, try using city and country or city and state" 
+            #format.json { flash[:alert] => "Could not find the location, try using city and country or city and state" }
+        end
+      else
+        @data = response.body
+        @weather = Weather.new(weather_params)
+        @weather.location = search
+        @weather.data = @data
+      end
+   
 
     respond_to do |format|
       if @weather.save
